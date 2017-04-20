@@ -1,0 +1,2530 @@
+<html lang="en"><head>
+    <title>Code coverage report for node-npmtest-wechat-api/node_modules/wechat-api/lib/api_card.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-wechat-api">npmtest-wechat-api (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-wechat-api/node_modules/wechat-api/lib/api_card.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">26.55% <small>(47 / 177)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 14)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 41)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">26.55% <small>(47 / 177)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> » <a href="index.html">node-npmtest-wechat-api/node_modules/wechat-api/lib/</a> » api_card.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tbody><tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+&nbsp;
+var path = require('path');
+var fs = require('fs');
+&nbsp;
+var formstream = require('formstream');
+var util = require('./util');
+var wrapper = util.wrapper;
+var postJSON = util.postJSON;
+var make = util.make;
+&nbsp;
+/**
+ * 上传Logo
+ * Examples:
+ * ```
+ * api.uploadLogo('filepath', callback);
+ * ```
+ * Callback:
+ *
+ * - `err`, 调用失败时得到的异常
+ * - `result`, 调用正常时得到的对象
+ *
+ * Result:
+ * ```
+ * {
+ *  "errcode":0,
+ *  "errmsg":"ok",
+ *  "url":"http://mmbiz.qpic.cn/mmbiz/iaL1LJM1mF9aRKPZJkmG8xXhiaHqkKSVMMWeN3hLut7X7hicFNjakmxibMLGWpXrEXB33367o7zHN0CwngnQY7zb7g/0"
+ * }
+ * ```
+ *
+ * @name uploadLogo
+ * @param {String} filepath 文件路径
+ * @param {Function} callback 回调函数
+ */
+make(exports, 'uploadLogo', <span class="fstat-no" title="function not covered">function (filepath, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var that = this;</span>
+<span class="cstat-no" title="statement not covered">  fs.stat(filepath, <span class="fstat-no" title="function not covered">function (err, stat) {</span></span>
+<span class="cstat-no" title="statement not covered">    if (err) {</span>
+<span class="cstat-no" title="statement not covered">      return callback(err);</span>
+    }
+<span class="cstat-no" title="statement not covered">    var form = formstream();</span>
+<span class="cstat-no" title="statement not covered">    form.file('buffer', filepath, path.basename(filepath), stat.size);</span>
+<span class="cstat-no" title="statement not covered">    var url = that.fileServerPrefix + 'media/uploadimg?access_token=' + that.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">    var opts = {</span>
+      dataType: 'json',
+      type: 'POST',
+      timeout: 60000, // 60秒超时
+      headers: form.headers(),
+      stream: form
+    };
+<span class="cstat-no" title="statement not covered">    that.request(url, opts, wrapper(callback));</span>
+  });
+});
+&nbsp;
+/**
+ * @name addLocations
+ * @param {Array} locations 位置
+ * @param {Function} callback 回调函数
+ */
+make(exports, 'addLocations', <span class="fstat-no" title="function not covered">function (locations, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var data = {</span>
+    location_list: locations
+  };
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/location/batchadd?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+make(exports, 'getLocations', <span class="fstat-no" title="function not covered">function (offset, count, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var data = {</span>
+    offset: offset,
+    count: count
+  };
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/location/batchget?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+make(exports, 'getColors', <span class="fstat-no" title="function not covered">function (callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/getcolors?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  this.request(url, {dataType: 'json'}, wrapper(callback));</span>
+});
+&nbsp;
+make(exports, 'createCard', <span class="fstat-no" title="function not covered">function (card, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/create?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  var data = {card: card};</span>
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+exports.getRedirectUrl = <span class="fstat-no" title="function not covered">function (url, encryptCode, cardId) {</span>
+  // TODO
+};
+&nbsp;
+make(exports, 'createQRCode', <span class="fstat-no" title="function not covered">function (card, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/qrcode/create?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  var data = {</span>
+    action_name: 'QR_CARD',
+    action_info: {
+      card: card
+    }
+  };
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+/**
+ * 创建用于投放的卡卷二维码，支持投放单张卡卷和多张卡卷
+ * Examples:
+ * ```
+ * api.createCardQRCode('info', 'expire_seconds', callback);
+ * ```
+ * Callback:
+ *
+ * - `err`, 调用失败时得到的异常
+ * - `result`, 调用正常时得到的对象
+ *
+ * Result:
+ * ```
+ * {
+ *  "errcode": 0,
+ *  "errmsg": "ok",
+ *  "ticket":      "gQHB8DoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL0JIV3lhX3psZmlvSDZmWGVMMTZvAAIEsNnKVQMEIAMAAA==",//获取ticket后需调用换取二维码接口获取二维码图片，详情见字段说明。
+ *  "expire_seconds": 1800,
+ *  "url": "http://weixin.qq.com/q/BHWya_zlfioH6fXeL16o ",
+ *  "show_qrcode_url": " https://mp.weixin.qq.com/cgi-bin/showqrcode?  ticket=gQH98DoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL0czVzRlSWpsamlyM2plWTNKVktvAAIE6SfgVQMEgDPhAQ%3D%3D"
+ *  }
+ * ```
+ *
+ * @name createCardQRCode
+ * @param {Object} info 卡卷信息，支持单张和多张模式
+ * 二维码投放单张卡卷
+ * ```
+ * {
+ *   "expire_seconds": 1800,
+ *    "card": {
+ *       "card_id": "pAtUNs1c3cBtMs5KeL8FP1f3fOaE"
+ *     }
+ * }
+ * ```
+ * ```
+ * 二维码投放多张卡卷
+ * {
+ *   "expire_seconds": 1800,
+ *    "multiple_card": {
+ *       "card_list": [
+ *           {
+ *             "card_id": "pAtUNs-HV0evhGTWbU3ohp99tW7k"
+ *           },
+ *           {
+ *             "card_id": "pAtUNs1c3cBtMs5KeL8FP1f3fOaE"
+ *           }
+ *       ]
+ *   }
+ * }
+ * @param {number} expire_seconds 二维码的有效时间，范围是60 ~ 1800秒。不填默认为永久有效。
+ * @param {Function} callback 回调函数
+ */
+make(exports, 'createCardQRCode', <span class="fstat-no" title="function not covered">function (info, expire_seconds, callback) {</span>
+<span class="cstat-no" title="statement not covered">  if(typeof expire_seconds === 'function') {</span>
+<span class="cstat-no" title="statement not covered">    callback = expire_seconds;</span>
+<span class="cstat-no" title="statement not covered">    expire_seconds = null;</span>
+  }
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/qrcode/create?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  var data = {</span>
+    action_name: 'QR_'+Object.keys(info)[0].toUpperCase(),
+    expire_seconds: expire_seconds,
+    action_info: info
+  };
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+make(exports, 'consumeCode', <span class="fstat-no" title="function not covered">function (code, cardId, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/code/consume?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  var data = {</span>
+    code: code,
+    card_id: cardId
+  };
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+make(exports, 'decryptCode', <span class="fstat-no" title="function not covered">function (encryptCode, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/code/decrypt?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  var data = {</span>
+    encrypt_code: encryptCode
+  };
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+make(exports, 'deleteCard', <span class="fstat-no" title="function not covered">function (cardId, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/delete?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  var data = {</span>
+    card_id: cardId
+  };
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+make(exports, 'getCode', <span class="fstat-no" title="function not covered">function (code, cardId, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/code/get?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  var data = {</span>
+    code: code
+  };
+<span class="cstat-no" title="statement not covered">  if (typeof cardId !== 'function') {</span>
+<span class="cstat-no" title="statement not covered">    data.card_id = cardId;</span>
+  } else {
+<span class="cstat-no" title="statement not covered">    callback = cardId;</span>
+  }
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+make(exports, 'getCards', <span class="fstat-no" title="function not covered">function (offset, count, status_list, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/batchget?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  var data = {</span>
+    offset: offset,
+    count: count
+  };
+<span class="cstat-no" title="statement not covered">  if (typeof status_list !== 'function') {</span>
+<span class="cstat-no" title="statement not covered">    data.status_list = status_list;</span>
+  } else {
+<span class="cstat-no" title="statement not covered">    callback = status_list;</span>
+  }
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+make(exports, 'getCard', <span class="fstat-no" title="function not covered">function (cardId, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/get?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  var data = {</span>
+    card_id: cardId
+  };
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+make(exports, 'updateCode', <span class="fstat-no" title="function not covered">function (code, cardId, newcode, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/code/update?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  var data = {</span>
+    code: code,
+    card_id: cardId,
+    newcode: newcode
+  };
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+make(exports, 'unavailableCode', <span class="fstat-no" title="function not covered">function (code, cardId, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/code/unavailable?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  var data = {</span>
+    code: code
+  };
+<span class="cstat-no" title="statement not covered">  if (typeof cardId !== 'function') {</span>
+<span class="cstat-no" title="statement not covered">    data.card_id = cardId;</span>
+  } else {
+<span class="cstat-no" title="statement not covered">    callback = cardId;</span>
+  }
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+make(exports, 'updateCard', <span class="fstat-no" title="function not covered">function (cardId, cardType, cardInfo, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/update?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  var data = {</span>
+    card_id: cardId
+  };
+<span class="cstat-no" title="statement not covered">  data[cardType.toLowerCase()] = cardInfo;</span>
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+make(exports, 'updateCardStock', <span class="fstat-no" title="function not covered">function (cardId, num, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/modifystock?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  var data = {</span>
+    card_id: cardId
+  };
+<span class="cstat-no" title="statement not covered">  if (num &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered">    data.increase_stock_value = Math.abs(num);</span>
+  } else {
+<span class="cstat-no" title="statement not covered">    data.reduce_stock_value = Math.abs(num);</span>
+  }
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+make(exports, 'activateMembercard', <span class="fstat-no" title="function not covered">function (info, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/membercard/activate?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(info), wrapper(callback));</span>
+});
+&nbsp;
+/**
+ * 设置开卡字段接口
+ * ```
+ * Examples:
+ * ```
+ * api.activateMembercardUserForm(info, callback);
+ *
+ * ```
+ * Callback:
+ *
+ * - `err`, 调用失败时得到的异常
+ * - `result`, 调用正常时得到的对象
+ *
+ * Result:
+ * ```
+ * {
+ *  "errcode":0,
+ *  "errmsg":"ok"
+ * }
+ * ```
+ *
+ * @name activateMembercardUserForm
+ * @param {Object} info 参数
+ * @param {Function} callback 回调函数
+ */
+make(exports, 'activateMembercardUserForm', <span class="fstat-no" title="function not covered">function (info, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/membercard/activateuserform/set?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(info), wrapper(callback));</span>
+});
+&nbsp;
+make(exports, 'getMembercard', <span class="fstat-no" title="function not covered">function (info, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/membercard/userinfo/get?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(info), wrapper(callback));</span>
+});
+&nbsp;
+make(exports, 'updateMembercard', <span class="fstat-no" title="function not covered">function (info, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/membercard/updateuser?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(info), wrapper(callback));</span>
+});
+&nbsp;
+make(exports, 'updateMovieTicket', <span class="fstat-no" title="function not covered">function (info, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/movieticket/updateuser?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(info), wrapper(callback));</span>
+});
+&nbsp;
+make(exports, 'checkInBoardingPass', <span class="fstat-no" title="function not covered">function (info, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/boardingpass/checkin?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(info), wrapper(callback));</span>
+});
+&nbsp;
+make(exports, 'updateLuckyMonkeyBalance', <span class="fstat-no" title="function not covered">function (code, cardId, balance, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/luckymonkey/updateuserbalance?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  var data = {</span>
+    'code': code,
+    'card_id': cardId,
+    'balance': balance
+  };
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+make(exports, 'updateMeetingTicket', <span class="fstat-no" title="function not covered">function (info, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/meetingticket/updateuser?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(info), wrapper(callback));</span>
+});
+&nbsp;
+make(exports, 'setTestWhitelist', <span class="fstat-no" title="function not covered">function (info, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/testwhitelist/set?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(info), wrapper(callback));</span>
+});
+&nbsp;
+/**
+ * 导入code接口
+ * 接口说明
+ * 开发者可调用该接口将自定义code导入微信卡券后台，由微信侧代理存储并下发code，本接口仅用于支持自定义code的卡券参与互通。
+ * code:
+ * ```
+ * [
+ *   "11111",
+ *   "22222",
+ *   "33333"
+ * ]
+ * ```
+ * Examples:
+ * ```
+ * api.importCustomizedCodes('cardId', code, callback);
+ *
+ * ```
+ * Callback:
+ *
+ * - `err`, 调用失败时得到的异常
+ * - `result`, 调用正常时得到的对象
+ *
+ * Result:
+ * ```
+ * {
+ *  "errcode":0,
+ *  "errmsg":"ok"
+ * }
+ * ```
+ *
+ * @name importCustomizedCodes
+ * @param {String} cardId 卡券ID
+ * @param {Array} code 待导入自定义code
+ * @param {Function} callback 回调函数
+ */
+make(exports, 'importCustomizedCodes', <span class="fstat-no" title="function not covered">function (cardId, code, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/code/deposit?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  var data = {</span>
+    'card_id': cardId,
+    'code': code
+  };
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+/**
+ * 核查code接口
+ * 接口说明
+ * 支持开发者调用该接口查询code导入微信后台的情况。
+ * code:
+ * ```
+ * [
+ *   "11111",
+ *   "22222",
+ *   "33333"
+ * ]
+ * ```
+ * Examples:
+ * ```
+ * api.checkCustomizedCodes('cardId', code, callback);
+ * ```
+ * Callback:
+ *
+ * - `err`, 调用失败时得到的异常
+ * - `result`, 调用正常时得到的对象
+ *
+ * Result:
+ * ```
+ * {
+ *  "errcode":0,
+ *  "errmsg":"ok",
+ *  "exist_code":["11111","22222"],
+ *  "not_exist_code":["33333"]
+ * }
+ * ```
+ *
+ * @name checkCustomizedCodes
+ * @param {String} cardId 卡券ID
+ * @param {Array} code 待核查自定义code
+ * @param {Function} callback 回调函数
+ */
+make(exports, 'checkCustomizedCodes', <span class="fstat-no" title="function not covered">function (cardId, code, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/code/checkcode?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  var data = {</span>
+    'card_id': cardId,
+    'code': code
+  };
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+/**
+ * 查询导入code数目接口
+ * 接口说明
+ * 支持开发者调用该接口查询code导入微信后台成功的数目。
+ * Examples:
+ * ```
+ * api.getDepositCodesCount('cardId', callback);
+ * ```
+ * Callback:
+ *
+ * - `err`, 调用失败时得到的异常
+ * - `result`, 调用正常时得到的对象
+ *
+ * Result:
+ * ```
+ * {
+ *  "errcode":0,
+ *  "errmsg":"ok",
+ *  "count":123
+ * }
+ * ```
+ *
+ * @name getDepositCodesCount
+ * @param {String} cardId 卡券ID
+ * @param {Function} callback 回调函数
+ */
+make(exports, 'getDepositCodesCount', <span class="fstat-no" title="function not covered">function (cardId, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/code/getdepositcount?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  var data = {</span>
+    'card_id': cardId
+  };
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+/**
+ * 拉取卡券概况数据
+ * @param  {String} beginDate             开始时间
+ * @param  {String} endDate               结束时间（结束时间不能为当天，不然会报错，可设为昨天）
+ * @param  {int} source                卡券来源，0为公众平台创建的卡券数据、1是API创建的卡券数据
+ */
+make(exports, 'getTotalCardDataInfo', <span class="fstat-no" title="function not covered">function (beginDate, endDate, source, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/datacube/getcardbizuininfo?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  var data = {</span>
+    'begin_date': beginDate,
+    'end_date': endDate,
+    'cond_source': source
+  };
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+&nbsp;
+/**
+ * 获取免费券数据
+ * @param  {String} cardId                cardId 卡券ID
+ * @param  {String} beginDate             开始时间
+ * @param  {String} endDate               结束时间（结束时间不能为当天，不然会报错，可设为昨天）
+ * @param  {int} source                卡券来源，0为公众平台创建的卡券数据、1是API创建的卡券数据
+ */
+make(exports, 'getCardDataInfo', <span class="fstat-no" title="function not covered">function (cardId, beginDate, endDate, source, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/datacube/getcardcardinfo?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  var data = {</span>
+    'begin_date': beginDate,
+    'end_date': endDate,
+    'cond_source': source,
+    'card_id': cardId
+  };
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+/**
+ * 设置商户的核销员
+ * 接口说明
+ * 开发者需调用该接口设置商户的核销员,并指定核销员的门店。
+ * Examples:
+ * ```
+ * api.addConsumer('username', 'locationId', callback);
+ * ```
+ * Callback:
+ *
+ * - `err`, 调用失败时得到的异常
+ * - `result`, 调用正常时得到的对象
+ *
+ * Result:
+ * ```
+ * {
+ *  "errcode":0,
+ *  "errmsg":"ok"
+ * }
+ * ```
+ *
+ * @name addConsumer
+ * @param {String} username 店员的微信号,开发者须确认该微信号在设置之前已 经关注”卡券商户助手公众号“
+ * @param {String} locationId 当前核销员关联的门店值
+ * @param {Function} callback 回调函数
+ */
+make(exports, 'addConsumer', <span class="fstat-no" title="function not covered">function (username, locationId, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/consumer/add?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  var data = {</span>
+    'username': username,
+    'is_super_consumer': true
+  };
+<span class="cstat-no" title="statement not covered">  if (locationId) {</span>
+<span class="cstat-no" title="statement not covered">    data.location_id = locationId;</span>
+<span class="cstat-no" title="statement not covered">    data.is_super_consumer = false;</span>
+  }
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+/**
+ * 卡券开放类目查询接口
+ * 接口说明
+ * 通过调用该接口查询卡券开放的类目ID，类目会随业务发展变更，请每次用接口去查询获取实时卡券类目。
+ * 注意：
+ * 1. 本接口查询的返回值还有卡券资质ID,此处的卡券资质为：已微信认证的公众号通过微信公众平台申请卡券功能时，所需的资质。
+ * 2.对于第三方开发者代制（无公众号）模式，子商户无论选择什么类目，均暂不需按照此返回提供资质，返回值仅参考类目ID 即可。
+ * Examples:
+ * ```
+ * api.getApplyProtocol(callback);
+ * ```
+ * Callback:
+ *
+ * - `err`, 调用失败时得到的异常
+ * - `result`, 调用正常时得到的对象
+ *
+ * Result:
+ * ```
+ * {
+ *  "category": [
+ *        {
+ *            "primary_category_id": 1,
+ *            "category_name": "美食",
+ *            "secondary_category": [
+ *                {
+ *                    "secondary_category_id": 101,
+ *                    "category_name": "粤菜",
+ *                    "need_qualification_stuffs": [
+ *                        "food_service_license_id",
+ *                        "food_service_license_bizmedia_id"
+ *                    ],
+ *                    "can_choose_prepaid_card": 1,
+ *                    "can_choose_payment_card": 1
+ *                },
+ *        }
+ *    ],
+ *  "errcode":0,
+ *  "errmsg":"ok"
+ * }
+ * ```
+ *
+ * @name getApplyProtocol
+ * @param {Object} options 子商户相关资料
+ * @param {Function} callback 回调函数
+ */
+make(exports, 'getApplyProtocol', <span class="fstat-no" title="function not covered">function (callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/getapplyprotocol?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  this.request(url, {dataType: 'json'}, wrapper(callback));</span>
+});
+&nbsp;
+/**
+ * 创建子商户接口
+ * 接口说明
+ * 支持母商户调用该接口传入子商户的相关资料，并获取子商户ID，用于子商户的卡券功能管理。
+ * 子商户的资质包括：商户名称、商户logo（图片）、卡券类目、授权函（扫描件或彩照）、授权函有效期截止时间。
+ * Examples:
+ * ```
+ * api.submitSubmerchant(options, callback);
+ * ```
+ * options:
+ * {
+ *  "brand_name": "aaaaaa",
+ *  "app_id"："xxxxxxxxxxx",
+ *  "logo_url": "http://mmbiz.xxxx",
+ *  "protocol": "xxxxxxxxxx",
+ *  "agreement_media_id":"xxxxxxxxxx",
+ *  "operator_media_id":"xxxxxxxx",
+ *  "end_time": 1438990559,
+ *  "primary_category_id": 1,
+ *  "secondary_category_id": 101
+ * }
+ *
+ * Callback:
+ *
+ * - `err`, 调用失败时得到的异常
+ * - `result`, 调用正常时得到的对象
+ *
+ * @name submitSubmerchant
+ * @param {Object} options 子商户相关资料
+ * @param {Function} callback 回调函数
+ */
+make(exports, 'submitSubmerchant', <span class="fstat-no" title="function not covered">function (options, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/submerchant/submit?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  var data = {</span>
+    'info': options
+  };
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+/**
+ * 更新子商户接口
+ * 接口说明
+ * 支持调用该接口更新子商户信息。
+ * Examples:
+ * ```
+ * api.updateSubmerchant(options, callback);
+ * ```
+ * options:
+ * {
+ *  "merchant_id": 12,
+ *  "brand_name": "aaaaaa",
+ *  "app_id"："xxxxxxxxxxx",
+ *  "logo_url": "http://mmbiz.xxxx",
+ *  "protocol": "xxxxxxxxxx",
+ *  "agreement_media_id":"xxxxxxxxxx",
+ *  "operator_media_id":"xxxxxxxx",
+ *  "end_time": 1438990559,
+ *  "primary_category_id": 1,
+ *  "secondary_category_id": 101
+ * }
+ *
+ * Callback:
+ *
+ * - `err`, 调用失败时得到的异常
+ * - `result`, 调用正常时得到的对象
+ *
+ * @name updateSubmerchant
+ * @param {Object} options 子商户相关资料
+ * @param {Function} callback 回调函数
+ */
+make(exports, 'updateSubmerchant', <span class="fstat-no" title="function not covered">function (options, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/submerchant/update?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  var data = {</span>
+    'info': options
+  };
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+/**
+ * 拉取单个子商户信息接口
+ * 接口说明
+ * 通过指定的子商户merchant_id，拉取该子商户的基础信息。
+ * 注意，用母商户去调用接口，但接口内传入的是子商户的merchant_id。
+ * Examples:
+ * ```
+ * api.getSubmerchant('merchantId', callback);
+ * ```
+ * Callback:
+ *
+ * - `err`, 调用失败时得到的异常
+ * - `result`, 调用正常时得到的对象
+ *
+ * @name getSubmerchant
+ * @param {String} merchantId 子商户相关资料
+ * @param {Function} callback 回调函数
+ */
+make(exports, 'getSubmerchant', <span class="fstat-no" title="function not covered">function (merchantId, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/submerchant/get?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  var data = {</span>
+    'merchant_id': merchantId
+  };
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+&nbsp;
+/**
+ * 批量拉取子商户信息接口
+ * 接口说明
+ * 母商户可以通过该接口批量拉取子商户的相关信息，一次调用最多拉取100个子商户的信息，可以通过多次拉去满足不同的查询需求
+ * Examples:
+ * ```
+ * api.batchgetSubmerchant(data, callback);
+ * ```
+ * Callback:
+ *
+ * - `err`, 调用失败时得到的异常
+ * - `result`, 调用正常时得到的对象
+ *
+ * @name batchgetSubmerchant
+ * @param {Object} data 查询条件 {"begin_id": 0,"limit": 50,"status": "CHECKING"}
+ * @param {Function} callback 回调函数
+ */
+make(exports, 'batchgetSubmerchant', <span class="fstat-no" title="function not covered">function (data, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/submerchant/batchget?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+&nbsp;
+/**
+ * 拉取拉取会员信息接口
+ * 接口说明
+ * 支持开发者根据CardID和Code查询会员信息。
+ * Examples:
+ * ```
+ * api.getMemberCardUserInfo({"card_id": abd5e78412e5d12ff,"code": 5566778811002233}, callback);
+ * ```
+ * Callback:
+ *
+ * - `err`, 调用失败时得到的异常
+ * - `result`, 调用正常时得到的对象
+ *
+ * @name getMemberCardUserInfo
+ * @param {Object} info 查询条件 {"card_id": abd5e78412e5d12ff,"code": 5566778811002233}
+ * @param {Function} callback 回调函数
+ */
+make(exports, 'getMemberCardUserInfo', <span class="fstat-no" title="function not covered">function (info, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/membercard/userinfo/get?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  var data = info;</span>
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+/**
+ * 更新会员信息
+ * 接口说明
+ * 当会员持卡消费后，支持开发者调用该接口更新会员信息。会员卡交易后的每次信息变更需通过该接口通知微信，便于后续消息通知及其他扩展功能。
+ * Examples:
+ * ```
+ * api.updateMemberCardUserInfo(data, callback);
+ * ```
+ * Callback:
+ *
+ * - `err`, 调用失败时得到的异常
+ * - `result`, 调用正常时得到的对象
+ *
+ * @name getMemberCardUserInfo
+ * @param {Object} data 查询条件 {"card_id": abd5e78412e5d12ff,"code": 5566778811002233, "record_bonus" : 3000}
+ * @param {Function} callback 回调函数
+ */
+make(exports, 'updateMemberCardUserInfo', <span class="fstat-no" title="function not covered">function (data, callback) {</span>
+<span class="cstat-no" title="statement not covered">  var url = this.endpoint + '/card/membercard/updateuser?access_token=' + this.token.accessToken;</span>
+<span class="cstat-no" title="statement not covered">  this.request(url, postJSON(data), wrapper(callback));</span>
+});
+&nbsp;
+&nbsp;</pre></td></tr>
+</tbody></table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Thu Apr 20 2017 16:22:09 GMT+0000 (UTC)</div>
+</div>
+
+
+</body></html>
